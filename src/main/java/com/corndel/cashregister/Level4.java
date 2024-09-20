@@ -2,7 +2,6 @@ package com.corndel.cashregister;
 
 import com.corndel.cashregister.models.Item;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Level4 {
@@ -11,21 +10,22 @@ public class Level4 {
    * the drawer. Returns false if it is not possible.
    */
   public static boolean canMakeAmount(int target, List<Item> drawer) {
-    System.out.println(target);
-    
-    // Reverse order of list
-    Collections.reverse(drawer);
-    
     for (Item item : drawer) {
-      target -= item.getQuantity() * item.getValue();
-      if (target <= 0) {
-        break;
+      if (target < item.getValue()) {
+        continue;
+      }
+      int quantity = item.getQuantity();
+      if (quantity == 0) {
+        continue;
+      }
+      while (quantity != 0) {
+        if (target < item.getValue()) {
+          break;
+        }
+        target -= item.getValue();
+        quantity--;
       }
     }
-    
-    // Reset order of list
-    Collections.reverse(drawer);
-    
     return target == 0 ? true : false;
   }
 }
