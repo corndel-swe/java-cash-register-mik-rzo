@@ -10,7 +10,7 @@ public class Exercise2a {
   public static int countVeggies(List<Recipe> recipes) {
     int count = 0;
     for (Recipe recipe : recipes) {
-      if (recipe.isVegetarian) {
+      if (recipe.isVegetarian()) {
         count++;
       }
     }
